@@ -1,21 +1,26 @@
-const salesCollection = require('../models/sales')
+const salesCollection = require('../models/sales');
 
 const makeSales = async (req, res) => {
+  const { name, unitPrice, quantity, customerName, email, phoneNumber } = req.body;
 
-    const {name, unitPrice, quantity} = req.body
-    
+  try {
     const addTosales = await salesCollection.create({
-        name: name,
-        unitPrice: unitPrice,
-        quantity: quantity
-    })
+      name,
+      unitPrice,
+      quantity,
+      customerName,
+      email, 
+      phoneNumber,
+    });
 
-    if (addTosales){
-        res.send({ message: "Medicine add successfully!", status: 200 })
+    if (addTosales) {
+      res.status(200).send({ message: "Sale recorded successfully!" });
+    } else {
+      res.status(502).send({ message: "Failed to record sale" });
     }
-    else {
-        res.send ( {message: "Failed to add medicine", status: 502} )
-    }
-}
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
 
-module.exports = makeSales
+module.exports = makeSales;

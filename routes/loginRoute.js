@@ -15,7 +15,7 @@ try{
         const isValidPassword = await bcrypt.compare(password, isUserExists.password)
 
         if (isValidPassword){
-            res.send({message: "Logged in successfully!", status: 200})
+            res.send({message: "Logged in successfully!", status: 200, data: isUserExists})
         }
         else{
             res.send({message: "Invalid username or password!", status: 400})

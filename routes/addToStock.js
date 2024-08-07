@@ -1,26 +1,30 @@
-const stockCollection = require('../models/stock')
+const stockCollection = require('../models/stock');
 
 const stockRoute = async (req, res) => {
+    const { name, unitPrice, quantity } = req.body;
 
-    const {name, unitPrice, quantity} = req.body
-    
-    const addToStock = await stockCollection.create({
-        name: name,
-        unitPrice: unitPrice,
-        quantity: quantity
-    })
     try {
-        if (addToStock){
-            res.send({ message: "Medicine add successfully!", status: 200 })
+        // Check if the medicine name already exists
+        const existingMedicine = await stockCollection.findOne({ name: name });
+        if (existingMedicine) {
+            return res.status(400).send({ message: `${name} already exists`, status: 400 });
         }
-        else {
-            res.send ( { message: "Failed to add medicine", status: 502 } )
-        }
-    }
-    catch (err) {
-        res.send({ message: err }) 
-    }
-    
-}
 
-module.exports = stockRoute
+        // Add new medicine to the stock
+        const addToStock = await stockCollection.create({
+            name: name,
+            unitPrice: unitPrice,
+            quantity: quantity,
+        });
+
+        if (addToStock) {
+            res.status(200).send({ message: "Medicine added successfully!", status: 200 });
+        } else {
+            res.status(502).send({ message: "Failed to add medicine", status: 502 });
+        }
+    } catch (err) {
+        res.status(500).send({ message: err.message, status: 500 });
+    }
+};
+
+module.exports = stockRoute;

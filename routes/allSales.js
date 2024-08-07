@@ -1,9 +1,9 @@
-const stockCollection = require('../models/sales');
+const salesCollection = require('../models/sales');
 
 const allSales = async (req, res) => {
     try {
         // Use async/await to wait for the database query
-        const fetchAllSales = await stockCollection.find({});
+        const fetchAllSales = await salesCollection.find({}).sort({ date: -1 });
 
         // Check if there is any data
         if (fetchAllSales.length > 0) {
@@ -16,6 +16,6 @@ const allSales = async (req, res) => {
         console.error('Error fetching stock data:', error);
         res.status(500).json({ message: 'Internal Server Error' });
     }
-};
+}; 
 
 module.exports = allSales;

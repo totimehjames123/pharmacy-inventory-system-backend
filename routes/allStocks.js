@@ -2,8 +2,8 @@ const stockCollection = require('../models/stock');
 
 const allStock = async (req, res) => {
     try {
-        // Use async/await to wait for the database query
-        const fetchAllStocks = await stockCollection.find({});
+        // Use async/await to wait for the database query and sort by date in descending order
+        const fetchAllStocks = await stockCollection.find({}).sort({ date: -1 });
 
         // Check if there is any data
         if (fetchAllStocks.length > 0) {

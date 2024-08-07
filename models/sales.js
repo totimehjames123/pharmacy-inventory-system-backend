@@ -1,25 +1,34 @@
-const mongoose = require('mongoose')
-const stockCollection = require('./stock')
+const mongoose = require('mongoose');
 
 const salesSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        
-    },
-    unitPrice: {
-        type: Number,
-        
-    },
-    quantity: {
-        type: Number,
-    },
-    date: {
-        type: Date,
-        default: Date.now()
-    },
-    // stock: [
-    //    {type: mongoose.Schema.Types.ObjectId, ref: stockCollection} 
-    // ]
-})
+  name: {
+    type: String,
+    required: true,
+  },
+  unitPrice: {
+    type: Number,
+    required: true,
+  },
+  quantity: {
+    type: Number,
+    required: true,
+  },
+  customerName: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  phoneNumber: {
+    type: String,
+    required: true,
+  },
+  date: {
+    type: Date, 
+    default: Date.now,
+  },
+});
 
-module.exports = mongoose.model("sales", salesSchema)
+module.exports = mongoose.model("sales", salesSchema);
