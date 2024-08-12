@@ -10,7 +10,7 @@ const allSales = async (req, res) => {
             res.status(200).json({ sales: fetchAllSales });
         } else {
             // If no data is found, you can send an appropriate response
-            res.status(404).json({ message: 'No stocks found' });
+            res.status(404).json({ message: 'No sales found' });
         }
     } catch (error) {
         console.error('Error fetching stock data:', error);
