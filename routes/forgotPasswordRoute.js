@@ -13,7 +13,7 @@ const sendResetPasswordEmail = async (email, verificationCode) => {
   const mailOptions = {
     from: process.env.SMTP_USER,
     to: email,
-    subject: 'KINGDOM HERBAL CENTER: Password Reset Verification Code',
+    subject: 'EAST CANTONMENT PHARMACY: Password Reset Verification Code',
     text: `You requested a password reset. Use the following verification code to reset your password: ${verificationCode}`,
   };
 

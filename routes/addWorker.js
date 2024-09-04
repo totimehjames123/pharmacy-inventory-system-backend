@@ -23,7 +23,7 @@ const sendEmail = async (username, name, email, password) => {
   const mailOptions = {
     from: process.env.SMTP_USER,
     to: email,
-    subject: "KINGDOM HERBAL CENTER: Your new account password",
+    subject: "EAST CANTONMENT PHARMACY: Your new account password",
     text: `Hi ${name}, Your username is ${username} and your password is: ${password}`,
   };
 
